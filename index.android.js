@@ -50,4 +50,5 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('InnovationNative', () => InnovationNative);
+import App from './App'
+AppRegistry.registerComponent('InnovationNative', () => App);
