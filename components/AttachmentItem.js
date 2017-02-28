@@ -15,9 +15,6 @@ class AttachmentItem extends Component {
       checked: false,
     }
   }
-  onLongPress(e) {
-    console.log('Tips', 'You could do something with this row');
-  }
   toggleSelect(e) {
     this.setState((prevState, props) => {
       return {
