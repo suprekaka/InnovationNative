@@ -25,7 +25,7 @@ class AttachmentGrid extends Component {
   }
   render() {
     return (
-      <ListView style={{flex:1}}
+      <ListView style={this.props.styles}
         contentContainerStyle={styles.list}
         dataSource={this.state.dataSource}
         initialListSize={21}
