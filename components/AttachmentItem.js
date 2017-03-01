@@ -38,7 +38,11 @@ class AttachmentItem extends Component {
     } 
 
     return (
-    <TouchableWithoutFeedback delayLongPress={2000} onLongPress={longPressRow}>
+    <TouchableWithoutFeedback delayLongPress={800} onLongPress={() => {
+        longPressRow()
+        this.toggleSelect()
+      }
+    }>
       <View style={styles.container}>
           {checkbox}
           <View>

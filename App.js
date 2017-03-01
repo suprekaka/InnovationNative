@@ -1,4 +1,10 @@
 import React, { Component } from 'react'
+import {
+  View,
+  StyleSheet,
+} from 'react-native'
+
+import AttachmentToolbar from './components/AttachmentToolbar'
 import AttachmentGrid from './components/AttachmentGrid'
 
 const genRows = function() {
@@ -16,8 +22,33 @@ const genRows = function() {
 }
 
 class App extends Component {
+  constructor(props) {
+    super(props)
+  }
   render() {
-    return (<AttachmentGrid data={genRows()}/>)
+    return (
+      <View style={styles.container}>
+        <AttachmentToolbar styles={styles.attahmentToolbar}/>
+        <AttachmentGrid styles={styles.attachmentGrid} data={genRows()}/>
+      </View>  
+    )
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#ccc',
+  },
+  attahmentToolbar: {
+    height: 60,
+    backgroundColor: '#ccc',
+    borderStyle: 'solid',
+    borderBottomWidth: 3,
+    borderBottomColor: '#000',
+  },
+  attachmentGrid: {
+    flex: 1,
+  }
+})
 export default App
