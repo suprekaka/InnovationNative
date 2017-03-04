@@ -3,25 +3,32 @@ import {
   View,
   StyleSheet,
   ListView,
+  TouchableWithoutFeedback,
 } from 'react-native'
 
 import AttachmentItem from './AttachmentItem'
+
+const genRows = function() {
+  const datablob = []
+  for (let i = 0; i < 100; i++) {
+    datablob.push({
+      imgSource: {uri: 'https://www.baidu.com/img/bd_logo1.png'},
+      name: `Test name ${i}`,
+      size: '10',
+      subject: `Test subject ${i}`,
+      from: `Test from ${i}`
+    })
+  }
+  return datablob
+}
 
 class AttachmentGrid extends Component {
   constructor(props) {
     super(props)
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
-      dataSource: ds.cloneWithRows(props.data),
-      showCheckbox: false,
+      dataSource: ds.cloneWithRows(genRows()),
     }
-  }
-  longPressRow() {
-    this.setState((prevState) => {
-      return {
-        showCheckbox: !prevState.showCheckbox
-      }
-    })
   }
   render() {
     return (
@@ -39,8 +46,8 @@ class AttachmentGrid extends Component {
   _renderRow(rowData, sessionId, rowId) {
     return (
       <AttachmentItem 
-        longPressRow={() => this.longPressRow()}
-        showCheckbox={this.state.showCheckbox}
+        onClickDetail={this.props.onClickDetail}
+        onClickImage={() => console.log(rowData)}
         imgSource={rowData.imgSource}
         name={rowData.name}
         size={rowData.size}
@@ -54,7 +61,6 @@ class AttachmentGrid extends Component {
       <View key={rowId} style={styles.listSeparator}></View>
     )
   }
-
 }
 
 const styles = StyleSheet.create({

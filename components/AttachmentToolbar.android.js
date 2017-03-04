@@ -12,6 +12,9 @@ class AttachmentToolbar extends Component {
     return (
       <ToolbarAndroid 
         title="Attachment View"
+        navIcon={require('../res/menu.png')}
+        onIconClicked={this.props.onIconClicked}
+        onActionSelected={this.props.onEditClicked} 
         style={this.props.styles}
         contentInsetEnd={10} 
         actions={this._renderActions()}/> 
@@ -19,8 +22,7 @@ class AttachmentToolbar extends Component {
   }
   _renderActions() {
     const actions = [
-      {title: 'Sortby', show:'always', showWithText:true},
-      {title: 'Filter', show:'always', showWithText:true},
+      {title: 'Edit', show:'always', showWithText:true},
     ]
     return actions
   }
