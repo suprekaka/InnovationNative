@@ -5,12 +5,6 @@ import {
 } from 'react-native'
 import AttachmentItem from '../components/AttachmentItem'
 
-const styles = StyleSheet.create({
-  list: {
-    marginTop: 20,
-  },
-})
-
 const mockData = []
 for (let i = 0; i < 100; i++) {
   mockData.push({
@@ -19,7 +13,7 @@ for (let i = 0; i < 100; i++) {
     subject: 'attachment',
     from: 'test@synchronoss.com',
     imgSource: {
-      uri: 'https://www.baidu.com/img/bd_logo1.png',
+      uri: 'http://www.baidu.com/img/bd_logo1.png',
     },
   })
 }
@@ -35,9 +29,16 @@ export default class App extends Component {
     this.state = {
       dataSource: ds.cloneWithRows(mockData),
     }
+
+    this.renderRow = this.renderRow.bind(this)
+    this.handlePressAttachmentItem = this.handlePressAttachmentItem.bind(this)
   }
 
-  renderAttachmentItem(data) {
+  handlePressAttachmentItem() {
+    this.props.gotoPreviewScene()
+  }
+
+  renderRow(data) {
     return (
       <AttachmentItem
         filename={data.filename}
@@ -45,6 +46,7 @@ export default class App extends Component {
         subject={data.subject}
         from={data.from}
         imgSource={data.imgSource}
+        onPress={this.handlePressAttachmentItem}
       />
     )
   }
@@ -52,9 +54,11 @@ export default class App extends Component {
   render() {
     return (
       <ListView
-        style={styles.list}
         dataSource={this.state.dataSource}
-        renderRow={this.renderAttachmentItem}
+        renderRow={this.renderRow}
+        initialListSize={10}
+        pageSize={5}
+        scrollRenderAheadDistance={500}
       />
     )
   }

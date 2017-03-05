@@ -1,22 +1,9 @@
-import React, { Component } from 'react'
-import {
-  View,
-  StyleSheet,
-} from 'react-native'
+import React from 'react'
+import AttachmentView from './components/AttachmentView'
 import AttachmentList from './containers/AttachmentList'
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-})
+const App = () => (
+  <AttachmentView />
+)
 
-export default class App extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <AttachmentList />
-      </View>
-    )
-  }
-}
+export default App

@@ -56,3 +56,4 @@ fastlane/screenshots
 # IDE
 #
 .vscode
+.tmp
