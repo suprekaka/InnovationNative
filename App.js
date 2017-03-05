@@ -102,10 +102,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#eee',
   },
   navigationBar: {
-    // backgroundColor: '#ddd',
+    backgroundColor: '#ddd',
     height: 50,
-    // borderStyle: 'solid',
-    // borderBottomColor: '#ccc',
+    borderStyle: 'solid',
+    borderBottomColor: '#ccc',
     borderBottomWidth: 1,
   },
   navigationTitle: {
