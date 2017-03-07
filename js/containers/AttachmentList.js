@@ -1,7 +1,6 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import {
   ListView,
-  StyleSheet,
 } from 'react-native'
 import AttachmentItem from '../components/AttachmentItem'
 
@@ -18,7 +17,15 @@ for (let i = 0; i < 100; i++) {
   })
 }
 
-export default class App extends Component {
+export default class AttachmentList extends Component {
+  static propTypes = {
+    gotoPreviewScene: PropTypes.func,
+  }
+
+  static defaultProps = {
+    gotoPreviewScene: () => {},
+  }
+
   constructor(props) {
     super(props)
 

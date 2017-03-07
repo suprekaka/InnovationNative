@@ -1,0 +1,19 @@
+/**
+ * @constant
+ * @type {string}
+ * Attachment List actions
+ */
+export const ATTACHMENT_LIST_REQUEST = 'req_ATTACH_LIST'
+export const ATTACHMENT_LIST_SUCCESS = 'ok_ATTACH_LIST'
+export const ATTACHMENT_LIST_FAILURE = 'err_ATTACH_LIST'
+export const ATTACHMENT_DELETE_REQUEST = 'req_ATTACH_DELETE'
+export const ATTACHMENT_DELETE_SUCCESS = 'ok_ATTACH_DELETE'
+export const ATTACHMENT_DELETE_FAILURE = 'err_ATTACH_DELETE'
+export const ATTACHMENT_MOVE_REQUEST = 'req_ATTACH_MOVE'
+export const ATTACHMENT_MOVE_SUCCESS = 'ok_ATTACH_MOVE'
+export const ATTACHMENT_MOVE_FAILURE = 'err_ATTACH_MOVE'
+export const ATTACHMENT_LIST_SORT = 'sort_ATTACH_LIST'
+export const ATTACHMENT_LIST_FILTER = 'filter_ATTACH_LIST'
+export const ATTACHMENT_LIST_PAGE_CHANGE = 'page_ATTACH_LIST'
+export const ATTACHMENT_SELECT = 'select_ATTACH'
+export const ATTACHMENT_EMPTY_CACHE = 'empty_ATTACH_CACHE'
