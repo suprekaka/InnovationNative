@@ -10,7 +10,7 @@ import {
   StyleSheet,
   Platform,
 } from 'react-native'
-import AttachmentList from '../containers/AttachmentList'
+import AttachmentList from './AttachmentList'
 
 const routes = [
   { title: 'Attachment View', index: 0 },
@@ -101,6 +101,7 @@ export default class AttachmentView extends Component {
         <StatusBar
           backgroundColor="blue"
           translucent={false}
+          barStyle={'light-content'}
         />
         <Navigator
           initialRoute={routes[0]}
@@ -128,7 +129,7 @@ const styles = StyleSheet.create({
     }),
   },
   navigationBar: {
-    backgroundColor: '#37b3ff',
+    backgroundColor: '#008cfa',
     // padding: 30,
     ...Platform.select({
       ios: {

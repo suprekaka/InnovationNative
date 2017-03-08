@@ -18,14 +18,6 @@ for (let i = 0; i < 100; i++) {
 }
 
 export default class AttachmentList extends Component {
-  static propTypes = {
-    gotoPreviewScene: PropTypes.func,
-  }
-
-  static defaultProps = {
-    gotoPreviewScene: () => {},
-  }
-
   constructor(props) {
     super(props)
 
@@ -69,4 +61,12 @@ export default class AttachmentList extends Component {
       />
     )
   }
+}
+
+AttachmentList.defaultProps = {
+  gotoPreviewScene: () => {},
+}
+
+AttachmentList.propTypes = {
+  gotoPreviewScene: PropTypes.func,
 }
