@@ -7,43 +7,44 @@ import {
   // ATTACHMENT_LIST_FILTER,
   ATTACHMENT_SELECT,
   ATTACHMENT_EMPTY_CACHE,
+  ATTACHMENT_SEARCH,
 } from './actionTypes'
 import { API } from '../middlewares/webtop'
 import { genKey } from '../utils'
 import {
   // parseParams,
   transformAttachments,
-} from '../transfrmers/attachments'
+} from '../transformers/attachments'
 
-const getPaginationParams = (pageNo, paginalCount) => {
-  if (pageNo <= 0) {
-    return {
-      offset: undefined,
-      limit: undefined,
-    }
-  }
-  return {
-    offset: (pageNo - 1) * paginalCount,
-    limit: paginalCount,
-  }
-}
+// const getPaginationParams = (pageNo, paginalCount) => {
+//   if (pageNo <= 0) {
+//     return {
+//       offset: undefined,
+//       limit: undefined,
+//     }
+//   }
+//   return {
+//     offset: (pageNo - 1) * paginalCount,
+//     limit: paginalCount,
+//   }
+// }
 
 /**
  *
  * @param mail
  * @returns {{folder, sort: *, filter: *}}
  */
-const getFetchDefaultParams = ({ mail }) => {
-  const [folder] = mail.folder.selectedFolders
-  const { sort, filter, currentPage, paginalCount } = mail.attachments
+// const getFetchDefaultParams = ({ mail }) => {
+//   const [folder] = mail.folder.selectedFolders
+//   const { sort, filter, currentPage, paginalCount } = mail.attachments
 
-  return {
-    folder,
-    sort,
-    filter,
-    ...getPaginationParams(currentPage, paginalCount),
-  }
-}
+//   return {
+//     folder,
+//     sort,
+//     filter,
+//     ...getPaginationParams(currentPage, paginalCount),
+//   }
+// }
 
 const emptyCache = (folder, sort, filter) => ({
   type: ATTACHMENT_EMPTY_CACHE,
@@ -53,12 +54,13 @@ const emptyCache = (folder, sort, filter) => ({
 })
 
 const fetchAttachmentList = (
-  { folder, sort, filter, offset, limit },
+  // { folder, sort, filter, offset, limit },
+  { folder } = { folder: 'Inbox' },
   isEmptyCache = false,
 ) => (dispatch) => {
   // console.info('~~ fetchAttachmentList with args -> ', folder, sort, filter, offset, limit)
   if (isEmptyCache) {
-    dispatch(emptyCache(folder, sort, filter))
+    // dispatch(emptyCache(folder, sort, filter))
   }
   return dispatch({
     [API]: {
@@ -67,19 +69,19 @@ const fetchAttachmentList = (
       params: {
         folderPath: folder,
         // sort: parseParams(sort),
-        sort,
+        // sort,
         // fileTypeFilter: parseParams(filter),
-        fileTypeFilter: filter,
-        page: {
-          offset,
-          size: limit,
-        },
+        // fileTypeFilter: filter,
+        // page: {
+          // offset,
+          // size: limit,
+        // },
       },
       folder,
-      sort,
-      filter,
-      offset,
-      limit,
+      // sort,
+      // filter,
+      // offset,
+      // limit,
       isEmptyCache,
       transformer: transformAttachments,
     },
@@ -119,11 +121,11 @@ const fetchAttachmentListIfNeeded = (
 ) => (dispatch, getState) => {
   // console.info('fetchAttachmentListIfNeeded', folder, sort, filter, pageNo)
   const state = getState()
-  const { paginalCount } = state.mail.attachments
+  // const { paginalCount } = state.mail.attachments
   const defaultParams = getFetchDefaultParams(state)
   let params = {
     ...{ folder, sort, filter },
-    ...getPaginationParams(pageNo, paginalCount),
+    // ...getPaginationParams(pageNo, paginalCount),
   }
   params = merge(defaultParams, params)
 
@@ -136,6 +138,11 @@ const fetchAttachmentListIfNeeded = (
 const selectAttachment = selected => ({
   type: ATTACHMENT_SELECT,
   selected,
+})
+
+const searchAttachments = keyword => ({
+  type: ATTACHMENT_SEARCH,
+  keyword,
 })
 
 
@@ -171,8 +178,10 @@ const selectAttachment = selected => ({
 
 
 export {
-  fetchAttachmentListIfNeeded,
+  // fetchAttachmentListIfNeeded,
+  fetchAttachmentList,
   // sortAttachmentList,
   // filterAttachmentList,
   selectAttachment,
+  searchAttachments,
 }

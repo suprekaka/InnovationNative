@@ -5,13 +5,13 @@ import {
 import AttachmentItem from '../components/AttachmentItem'
 
 const mockData = []
-for (let i = 0; i < 100; i++) {
+for (let i = 0; i < 100; i += 1) {
   mockData.push({
     filename: `filename ${i}`,
     size: '100kb',
     subject: 'attachment',
     from: 'test@synchronoss.com',
-    imgSource: {
+    imgSrc: {
       uri: 'http://www.baidu.com/img/bd_logo1.png',
     },
   })
@@ -26,11 +26,15 @@ export default class AttachmentList extends Component {
     })
 
     this.state = {
-      dataSource: ds.cloneWithRows(mockData),
+      dataSource: ds.cloneWithRows(props.listData),
     }
 
     this.renderRow = this.renderRow.bind(this)
     this.handlePressAttachmentItem = this.handlePressAttachmentItem.bind(this)
+  }
+
+  componentDidMount() {
+    this.props.fetchAttachmentList()
   }
 
   handlePressAttachmentItem() {
@@ -44,7 +48,7 @@ export default class AttachmentList extends Component {
         size={data.size}
         subject={data.subject}
         from={data.from}
-        imgSource={data.imgSource}
+        imgSrc={data.imgSrc}
         onPress={this.handlePressAttachmentItem}
       />
     )
@@ -68,5 +72,6 @@ AttachmentList.defaultProps = {
 }
 
 AttachmentList.propTypes = {
+  fetchAttachmentList: PropTypes.func.isRequired,
   gotoPreviewScene: PropTypes.func,
 }

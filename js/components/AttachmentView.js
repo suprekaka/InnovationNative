@@ -6,11 +6,51 @@ import {
   TouchableHighlight,
   Text,
   Image,
-  TextInput,
   StyleSheet,
   Platform,
 } from 'react-native'
-import AttachmentList from './AttachmentList'
+// import AttachmentList from './AttachmentList'
+import AttachmentVisibleList from '../containers/AttachmentVisibleList'
+import AttachmentSearchBar from '../containers/AttachmentSearchbar'
+
+const styles = StyleSheet.create({
+  navigator: {
+    ...Platform.select({
+      ios: {
+        paddingTop: 64,
+      },
+      android: {
+        paddingTop: 50,
+      },
+    }),
+  },
+  navigationBar: {
+    backgroundColor: '#008cfa',
+    // padding: 30,
+    ...Platform.select({
+      ios: {
+        height: 64,
+      },
+      android: {
+        height: 50,
+        borderStyle: 'solid',
+        borderBottomColor: '#ccc',
+        borderBottomWidth: 1,
+      },
+    }),
+  },
+  navigationTitle: {
+    // fontWeight: 'bold',
+    fontSize: 20,
+    paddingTop: 15,
+  },
+  attachmentList: {
+    flex: 1,
+  },
+  contentContainer: {
+    // paddingTop: 5,
+  },
+})
 
 const routes = [
   { title: 'Attachment View', index: 0 },
@@ -63,22 +103,14 @@ export default class AttachmentView extends Component {
   }
 
   renderScene(route, navigator) {
-    const { searchText } = this.state
+    // const { searchText } = this.state
     switch (route.index) {
       case 0:
       default: {
         return (
           <View style={styles.contentContainer}>
-            <View style={styles.searchContainer}>
-              <TextInput
-                style={styles.searchInput}
-                onChangeText={searchText => this.setState({ searchText })}
-                value={searchText}
-                placeholder={'Search'}
-                autoCapitalize={'none'}
-              />
-            </View>
-            <AttachmentList
+            <AttachmentSearchBar />
+            <AttachmentVisibleList
               style={styles.attachmentList}
               gotoPreviewScene={() => {
                 navigator.push(routes[1])
@@ -89,7 +121,9 @@ export default class AttachmentView extends Component {
       }
       case 1: {
         return (
-          <Text>preview preview</Text>
+          <View style={{ backgroundColor: '#fff', flex: 1 }}>
+            <Text>preview preview</Text>
+          </View>
         )
       }
     }
@@ -114,64 +148,3 @@ export default class AttachmentView extends Component {
     )
   }
 }
-
-// const windowSize = Dimensions.get('window')
-
-const styles = StyleSheet.create({
-  navigator: {
-    ...Platform.select({
-      ios: {
-        paddingTop: 64,
-      },
-      android: {
-        paddingTop: 50,
-      },
-    }),
-  },
-  navigationBar: {
-    backgroundColor: '#008cfa',
-    // padding: 30,
-    ...Platform.select({
-      ios: {
-        height: 64,
-      },
-      android: {
-        height: 50,
-        borderStyle: 'solid',
-        borderBottomColor: '#ccc',
-        borderBottomWidth: 1,
-      },
-    }),
-  },
-  navigationTitle: {
-    // fontWeight: 'bold',
-    fontSize: 20,
-    paddingTop: 15,
-  },
-  attachmentList: {
-    flex: 1,
-  },
-  searchContainer: {
-    ...Platform.select({
-      ios: {
-        backgroundColor: '#ddd',
-      },
-    }),
-    height: 40,
-  },
-  searchInput: {
-    backgroundColor: '#fff',
-    paddingHorizontal: 10,
-    marginHorizontal: 10,
-    ...Platform.select({
-      ios: {
-        marginTop: 6,
-        height: 28,
-        borderRadius: 8,
-      },
-    }),
-  },
-  contentContainer: {
-    // paddingTop: 5,
-  },
-})

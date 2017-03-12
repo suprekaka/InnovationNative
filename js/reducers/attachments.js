@@ -6,6 +6,7 @@ import {
   // ATTACHMENT_LIST_FILTER,
   ATTACHMENT_SELECT,
   ATTACHMENT_EMPTY_CACHE,
+  ATTACHMENT_SEARCH,
 } from '../actions/actionTypes'
 import { genKey } from '../utils'
 import {
@@ -35,7 +36,7 @@ const list = (
 ) => {
   switch (action.type) {
     case ATTACHMENT_LIST_SUCCESS: {
-      const { offset } = action.api
+      const offset = 0
       const { list } = action.data
       const listFragment = state.indexes.slice()
 
@@ -75,6 +76,7 @@ const attachments = (state = {
   messageSummaries: {},
   list: {},
   selected: [],
+  keyword: '',
   sort: SORT_NEWEST_FIRST,
   filter: FILTER_ALL,
   currentPage: 1,
@@ -89,8 +91,8 @@ const attachments = (state = {
       }
     }
     case ATTACHMENT_LIST_SUCCESS: {
-      const { api: { folder, sort, filter } } = action
-      const path = genKey(folder, sort, filter)
+      const { api: { folder } } = action
+      // const path = genKey(folder, sort, filter)
       return {
         ...state,
         items: {
@@ -103,7 +105,7 @@ const attachments = (state = {
         },
         list: {
           ...state.list,
-          [path]: list(state.list[path], action),
+          [folder]: list(state.list[folder], action),
         },
         fetchStatus: FETCH_STATUS_SUCCESS,
       }
@@ -139,6 +141,13 @@ const attachments = (state = {
       return {
         ...state,
         selected,
+      }
+    }
+    case ATTACHMENT_SEARCH: {
+      const { keyword } = action
+      return {
+        ...state,
+        keyword,
       }
     }
     default: {

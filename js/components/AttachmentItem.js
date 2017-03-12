@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PropTypes } from 'react'
 import {
   StyleSheet,
   Text,
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
 })
 
 const AttachmentItem = ({
-  imgSource,
+  imgSrc,
   filename,
   size,
   subject,
@@ -44,9 +44,8 @@ const AttachmentItem = ({
       <View>
         <Image
           style={styles.image}
-          source={imgSource}
-        >
-        </Image>
+          source={imgSrc}
+        />
       </View>
       <View style={styles.detailContainer}>
         <Text className="name">{filename}</Text>
@@ -57,5 +56,18 @@ const AttachmentItem = ({
     </View>
   </TouchableWithoutFeedback>
 )
+
+AttachmentItem.defaultProps = {
+  onPress: () => {},
+}
+
+AttachmentItem.propTypes = {
+  imgSrc: PropTypes.string.isRequired,
+  filename: PropTypes.string.isRequired,
+  size: PropTypes.string.isRequired,
+  subject: PropTypes.string.isRequired,
+  from: PropTypes.string.isRequired,
+  onPress: PropTypes.func,
+}
 
 export default AttachmentItem
