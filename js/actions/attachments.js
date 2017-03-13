@@ -13,7 +13,7 @@ import { API } from '../middlewares/webtop'
 import { genKey } from '../utils'
 import {
   // parseParams,
-  transformAttachments,
+  normalizeAttachments,
 } from '../transformers/attachments'
 
 // const getPaginationParams = (pageNo, paginalCount) => {
@@ -83,7 +83,7 @@ const fetchAttachmentList = (
       // offset,
       // limit,
       isEmptyCache,
-      transformer: transformAttachments,
+      transformer: normalizeAttachments,
     },
   })
 }

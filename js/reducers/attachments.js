@@ -68,8 +68,8 @@ const messageSummaries = (state = {}, action) => {
   }
 }
 
-const { FILTER_ALL } = ATTACHMENT
-const { SORT_NEWEST_FIRST } = ATTACHMENT
+// const { FILTER_ALL } = ATTACHMENT
+// const { SORT_NEWEST_FIRST } = ATTACHMENT
 
 const attachments = (state = {
   items: {},
@@ -77,10 +77,10 @@ const attachments = (state = {
   list: {},
   selected: [],
   keyword: '',
-  sort: SORT_NEWEST_FIRST,
-  filter: FILTER_ALL,
-  currentPage: 1,
-  paginalCount: 60,
+  // sort: SORT_NEWEST_FIRST,
+  // filter: FILTER_ALL,
+  // currentPage: 1,
+  // paginalCount: 60,
   fetchStatus: FETCH_STATUS_NEVER,
 }, action) => {
   switch (action.type) {

@@ -4,30 +4,15 @@ import {
 } from 'react-native'
 import AttachmentItem from '../components/AttachmentItem'
 
-const mockData = []
-for (let i = 0; i < 100; i += 1) {
-  mockData.push({
-    filename: `filename ${i}`,
-    size: '100kb',
-    subject: 'attachment',
-    from: 'test@synchronoss.com',
-    imgSrc: {
-      uri: 'http://www.baidu.com/img/bd_logo1.png',
-    },
-  })
-}
+const ds = new ListView.DataSource({
+  rowHasChanged: (r1, r2) => r1 !== r2,
+})
+
+const getListData = data => ds.cloneWithRows(data)
 
 export default class AttachmentList extends Component {
   constructor(props) {
     super(props)
-
-    const ds = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => r1 !== r2,
-    })
-
-    this.state = {
-      dataSource: ds.cloneWithRows(props.listData),
-    }
 
     this.renderRow = this.renderRow.bind(this)
     this.handlePressAttachmentItem = this.handlePressAttachmentItem.bind(this)
@@ -46,8 +31,8 @@ export default class AttachmentList extends Component {
       <AttachmentItem
         filename={data.filename}
         size={data.size}
-        subject={data.subject}
-        from={data.from}
+        subject={data.messageInfo.subject}
+        from={data.messageInfo.from.address}
         imgSrc={data.imgSrc}
         onPress={this.handlePressAttachmentItem}
       />
@@ -55,9 +40,10 @@ export default class AttachmentList extends Component {
   }
 
   render() {
+    const { listData } = this.props
     return (
       <ListView
-        dataSource={this.state.dataSource}
+        dataSource={getListData(listData)}
         renderRow={this.renderRow}
         initialListSize={10}
         pageSize={5}
@@ -72,6 +58,19 @@ AttachmentList.defaultProps = {
 }
 
 AttachmentList.propTypes = {
+  listData: PropTypes.arrayOf(
+    PropTypes.shape({
+      filename: PropTypes.string.isRequired,
+      size: PropTypes.number.isRequired,
+      messageInfo: PropTypes.shape({
+        subject: PropTypes.string.isRequired,
+        from: PropTypes.shape({
+          address: PropTypes.string.isRequired,
+        }).isRequired,
+      }).isRequired,
+      imgSrc: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
   fetchAttachmentList: PropTypes.func.isRequired,
   gotoPreviewScene: PropTypes.func,
 }

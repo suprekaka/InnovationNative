@@ -1,4 +1,4 @@
-import { schema, normalize } from 'normalizr'
+import { schema, normalize, denormalize } from 'normalizr'
 import { genKey } from '../utils'
 // import { ATTACHMENT } from '../../../constant'
 
@@ -162,18 +162,33 @@ const attachmentSchema = new schema.Entity('attachment', {
       part,
     },
   ) => genKey(uid, part),
-  // processStrategy: (value, parent, key) => {
-  //   console.log(value, parent, key)
-  // },
+  processStrategy: (entity) => {
+    const {
+      size,
+      contentType: {
+        baseType: type,
+      },
+      fileName: filename,
+      part,
+      messageInfo,
+    } = entity
+    return {
+      size,
+      type,
+      filename,
+      part,
+      messageInfo,
+    }
+  },
 })
 
 const attachmentListSchema = [attachmentSchema]
 
-const transformAttachments = (originalData) => {
+const normalizeAttachments = (originalData) => {
   const {
     entities: {
       attachment: items,
-      messageSummary: messageSummaries, 
+      messageSummary: messageSummaries,
     },
     result: {
       attachments: list,
@@ -190,6 +205,9 @@ const transformAttachments = (originalData) => {
   }
 }
 
+const denormalizeAttachments = input => denormalize(input, attachmentListSchema, {})
+
 export {
-  transformAttachments,
+  normalizeAttachments,
+  denormalizeAttachments,
 }
