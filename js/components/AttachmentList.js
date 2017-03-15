@@ -48,6 +48,7 @@ export default class AttachmentList extends Component {
         initialListSize={10}
         pageSize={5}
         scrollRenderAheadDistance={500}
+        enableEmptySections
       />
     )
   }
@@ -68,7 +69,7 @@ AttachmentList.propTypes = {
           address: PropTypes.string.isRequired,
         }).isRequired,
       }).isRequired,
-      imgSrc: PropTypes.string.isRequired,
+      imgSrc: PropTypes.string,
     }),
   ).isRequired,
   fetchAttachmentList: PropTypes.func.isRequired,

@@ -44,7 +44,7 @@ const AttachmentItem = ({
       <View>
         <Image
           style={styles.image}
-          source={imgSrc}
+          source={{ uri: imgSrc }}
         />
       </View>
       <View style={styles.detailContainer}>
@@ -59,6 +59,7 @@ const AttachmentItem = ({
 
 AttachmentItem.defaultProps = {
   onPress: () => {},
+  imgSrc: 'https://www.baidu.com/img/bd_logo1.png',
 }
 
 AttachmentItem.propTypes = {

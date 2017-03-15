@@ -9,46 +9,47 @@ import {
   StyleSheet,
   Platform,
 } from 'react-native'
-// import AttachmentList from './AttachmentList'
 import AttachmentVisibleList from '../containers/AttachmentVisibleList'
 import AttachmentSearchBar from '../containers/AttachmentSearchbar'
 
 const styles = StyleSheet.create({
   navigator: {
-    ...Platform.select({
-      ios: {
-        paddingTop: 64,
-      },
-      android: {
-        paddingTop: 50,
-      },
-    }),
+    paddingTop: 60,
   },
   navigationBar: {
     backgroundColor: '#008cfa',
-    // padding: 30,
-    ...Platform.select({
-      ios: {
-        height: 64,
-      },
-      android: {
-        height: 50,
-        borderStyle: 'solid',
-        borderBottomColor: '#ccc',
-        borderBottomWidth: 1,
-      },
-    }),
+    height: 60,
   },
   navigationTitle: {
-    // fontWeight: 'bold',
     fontSize: 20,
-    paddingTop: 15,
+    ...Platform.select({
+      ios: {
+        marginTop: 10,
+      },
+      android: {
+        marginTop: 22,
+        marginLeft: 50,
+      },
+    }),
   },
   attachmentList: {
     flex: 1,
   },
   contentContainer: {
     // paddingTop: 5,
+  },
+  leftImgBtn: {
+    marginLeft: 4,
+    height: 35,
+    width: 35,
+    ...Platform.select({
+      ios: {
+        marginTop: 4,
+      },
+      android: {
+        marginTop: 22,
+      },
+    }),
   },
 })
 
@@ -78,15 +79,27 @@ export default class AttachmentView extends Component {
               default:
               case 0: {
                 return (
-                  <TouchableHighlight onPress={this.toggleSideBar}>
-                    <Image source={menuImg} />
+                  <TouchableHighlight
+                    onPress={this.toggleSideBar}
+                    underlayColor={'#fff0'}
+                  >
+                    <Image
+                      style={styles.leftImgBtn}
+                      source={menuImg}
+                    />
                   </TouchableHighlight>
                 )
               }
               case 1: {
                 return (
-                  <TouchableHighlight onPress={() => navigator.pop()}>
-                    <Image source={backImg} />
+                  <TouchableHighlight
+                    onPress={() => navigator.pop()}
+                    underlayColor={'#fff0'}
+                  >
+                    <Image
+                      style={styles.leftImgBtn}
+                      source={backImg}
+                    />
                   </TouchableHighlight>
                 )
               }
@@ -133,8 +146,8 @@ export default class AttachmentView extends Component {
     return (
       <View style={{ flex: 1 }}>
         <StatusBar
-          backgroundColor="blue"
-          translucent={false}
+          backgroundColor="#ffffff00"
+          translucent
           barStyle={'light-content'}
         />
         <Navigator

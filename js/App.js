@@ -4,7 +4,8 @@ import createStore from './store'
 import AttachmentView from './components/AttachmentView'
 import { service } from './middlewares/webtop'
 
-service.URL = 'http://localhost:3000/'
+// service.URL = 'http://localhost:3000/'
+service.URL = 'http://192.168.31.156:3000/'
 
 const initialState = {
   // attachments: {},

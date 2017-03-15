@@ -62,6 +62,28 @@ const fetchAttachmentList = (
   if (isEmptyCache) {
     // dispatch(emptyCache(folder, sort, filter))
   }
+
+  // debugger
+  // fetch('http://192.168.31.156:3000/json', {
+  //   method: 'POST',
+  //   headers: {
+  //     'Accept': 'application/json',
+  //     'Content-Type': 'application/json',
+  //   },
+  //   body: JSON.stringify({
+  //     firstParam: 'yourValue',
+  //     secondParam: 'yourOtherValue',
+  //   }),
+  // })
+  //   .then(() => {
+  //     debugger
+  //   })
+  //   .catch((err) => {
+  //     console.log(err)
+  //     debugger
+  //   })
+  // return false
+
   return dispatch({
     [API]: {
       types: [ATTACHMENT_LIST_REQUEST, ATTACHMENT_LIST_SUCCESS, ATTACHMENT_LIST_FAILURE],

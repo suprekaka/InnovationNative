@@ -53,6 +53,9 @@ export const service = (api, params, transformer) => {
 
       return undefined === transformer || 'text' === transformer ? data : transformer(data)
     })
+    .catch((err) => {
+      console.log(err)
+    })
 }
 
 export const getSyncCsrfToken = () => service.csrf
