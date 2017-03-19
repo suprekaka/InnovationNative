@@ -22,8 +22,13 @@ export default class AttachmentList extends Component {
     this.props.fetchAttachmentList()
   }
 
-  handlePressAttachmentItem() {
-    this.props.gotoPreviewScene()
+  handlePressAttachmentItem(id) {
+    const {
+      gotoPreviewScene,
+      onPressAttachmentItem,
+    } = this.props
+    onPressAttachmentItem(id)
+    gotoPreviewScene()
   }
 
   renderRow(data) {
@@ -35,6 +40,8 @@ export default class AttachmentList extends Component {
         from={data.messageInfo.from.address}
         imgSrc={data.imgSrc}
         onPress={this.handlePressAttachmentItem}
+        uid={data.messageInfo.uid}
+        part={data.part}
       />
     )
   }
@@ -56,6 +63,7 @@ export default class AttachmentList extends Component {
 
 AttachmentList.defaultProps = {
   gotoPreviewScene: () => {},
+  onPressAttachmentItem: () => {},
 }
 
 AttachmentList.propTypes = {
@@ -74,4 +82,5 @@ AttachmentList.propTypes = {
   ).isRequired,
   fetchAttachmentList: PropTypes.func.isRequired,
   gotoPreviewScene: PropTypes.func,
+  onPressAttachmentItem: PropTypes.func,
 }

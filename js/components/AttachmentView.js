@@ -11,6 +11,7 @@ import {
 } from 'react-native'
 import AttachmentVisibleList from '../containers/AttachmentVisibleList'
 import AttachmentSearchBar from '../containers/AttachmentSearchbar'
+import AttachmentPreview from '../containers/AttachmentPreview'
 
 const styles = StyleSheet.create({
   navigator: {
@@ -37,6 +38,8 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     // paddingTop: 5,
+    flex: 1,
+    backgroundColor: '#fff',
   },
   leftImgBtn: {
     marginLeft: 4,
@@ -57,8 +60,8 @@ const routes = [
   { title: 'Attachment View', index: 0 },
   { title: 'Attachment Preview', index: 1 },
 ]
-const menuImg = require('../../res/menu.png')
-const backImg = require('../../res/back.png')
+const menuImg = require('./images/menu.png')
+const backImg = require('./images/back.png')
 
 export default class AttachmentView extends Component {
   constructor(props) {
@@ -134,8 +137,8 @@ export default class AttachmentView extends Component {
       }
       case 1: {
         return (
-          <View style={{ backgroundColor: '#fff', flex: 1 }}>
-            <Text>preview preview</Text>
+          <View style={styles.contentContainer}>
+            <AttachmentPreview />
           </View>
         )
       }

@@ -2,21 +2,21 @@ import { connect } from 'react-redux'
 import {
   // fetchAttachmentListIfNeeded,
   fetchAttachmentList,
+  selectAttachment,
 } from '../actions'
 import AttachmentList from '../components/AttachmentList'
 // import { denormalizeAttachments } from '../transformers/attachments'
-
-const folder = 'Inbox'
+import { defaultFolder } from '../config'
 
 const getVisibleAttachments = (items, messageSummaries, keyword) => {
-  if (!items[folder]) {
+  if (!items[defaultFolder]) {
     return []
   }
-  const data = Object.values(items[folder]).map((attach) => {
-    // attach.messageInfo = messageSummaries[folder][attach.messageInfo]
+  const data = Object.values(items[defaultFolder]).map((attach) => {
+    // attach.messageInfo = messageSummaries[defaultFolder][attach.messageInfo]
     return {
       ...attach,
-      messageInfo: messageSummaries[folder][attach.messageInfo],
+      messageInfo: messageSummaries[defaultFolder][attach.messageInfo],
     }
   })
   if (keyword.trim()) {
@@ -37,6 +37,7 @@ const mapStateToProps = ({
 
 const mapDispatchToProps = dispatch => ({
   fetchAttachmentList: () => dispatch(fetchAttachmentList()),
+  onPressAttachmentItem: id => dispatch(selectAttachment([id])),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(AttachmentList)
