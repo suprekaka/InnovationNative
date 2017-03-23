@@ -122,9 +122,9 @@ export default class Attachment extends Component {
     }
     return (
       <View style={{ flex: 1 }}>
-        <div style={{height:40,background:'#008cfa',display:'-webkit-box'}}>
+        <div style={{height:60,background:'#008cfa',display:'flex'}}>
           {button}
-          <div  style={{flex:1,margin:'auto',textAlign:'center',padding:'8px'}}><span>{renderScene.title}</span></div>
+          <div  style={{flex:1,margin:'auto',textAlign:'center'}}><span>{renderScene.title}</span></div>
         </div>
         {view}
       </View>
