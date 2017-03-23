@@ -36,9 +36,6 @@ const styles = StyleSheet.create({
       ios: {
         marginBottom: 2,
       },
-      web: {
-        marginBottom: 2,
-      },
     }),
   },
   filename: {
