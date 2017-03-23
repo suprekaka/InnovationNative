@@ -12,6 +12,9 @@ const styles = StyleSheet.create({
       ios: {
         backgroundColor: '#ddd',
       },
+      web: {
+        backgroundColor: '#ddd',
+      },
     }),
     height: 40,
   },
@@ -21,6 +24,11 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     ...Platform.select({
       ios: {
+        marginTop: 6,
+        height: 28,
+        borderRadius: 8,
+      },
+      web: {
         marginTop: 6,
         height: 28,
         borderRadius: 8,

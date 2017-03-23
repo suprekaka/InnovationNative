@@ -49,6 +49,9 @@ const styles = StyleSheet.create({
       ios: {
         marginTop: 4,
       },
+      web: {
+        marginTop: 4,
+      },
       android: {
         marginTop: 22,
       },
@@ -84,11 +87,11 @@ export default class Attachment extends Component {
     if (renderScene.index === 0) {
       view = (<View style={styles.contentContainer}>
         <AttachmentSearchBar />
-          <AttachmentVisibleList
-            style={styles.attachmentList}
-            gotoPreviewScene={() => {
-              this.renderScene(routes[1])
-            }}
+        <AttachmentVisibleList
+          style={styles.attachmentList}
+          gotoPreviewScene={() => {
+            this.renderScene(routes[1])
+          }}
           /></View>)
       button = (
         <TouchableHighlight
@@ -119,11 +122,11 @@ export default class Attachment extends Component {
     }
     return (
       <View style={{ flex: 1 }}>
-          <div style={{height:60,background:'#ddd',display:'flex'}}>
-            {button}
-            <div  style={{flex:1,margin:'auto',textAlign:'center'}}><span>{renderScene.title}</span></div>
-          </div>
-          {view}
+        <div style={{height:60,background:'#008cfa',display:'flex'}}>
+          {button}
+          <div  style={{flex:1,margin:'auto',textAlign:'center'}}><span>{renderScene.title}</span></div>
+        </div>
+        {view}
       </View>
     )
   }
