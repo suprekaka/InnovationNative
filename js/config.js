@@ -1,4 +1,4 @@
-const host = 'http://192.168.31.156:3000/'
+const host = 'http://10.37.10.211:3000/'
 const defaultFolder = 'Inbox'
 
 export {
