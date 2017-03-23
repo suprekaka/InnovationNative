@@ -38,7 +38,7 @@ export default class AttachmentList extends Component {
         size={data.size}
         subject={data.messageInfo.subject}
         from={data.messageInfo.from.address}
-        imgSrc={data.imgSrc}
+        imgSrc={data.thumbSrc}
         onPress={this.handlePressAttachmentItem}
         uid={data.messageInfo.uid}
         part={data.part}

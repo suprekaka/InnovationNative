@@ -171,6 +171,7 @@ const attachmentSchema = new schema.Entity('attachment', {
       fileName: filename,
       part,
       messageInfo,
+      thumbSrc,
     } = entity
     return {
       size,
@@ -178,6 +179,7 @@ const attachmentSchema = new schema.Entity('attachment', {
       filename,
       part,
       messageInfo,
+      thumbSrc,
     }
   },
 })

@@ -41,8 +41,6 @@ const styles = StyleSheet.create({
 })
 
 const AttachmentPreview = ({ previewData }) => {
-  console.info(previewData)
-  // debugger
   return (
     <View style={styles.previewContainer}>
       <View style={styles.fieldContainer}>
@@ -61,7 +59,7 @@ const AttachmentPreview = ({ previewData }) => {
       </View>
       <View style={styles.imageContainer}>
         <Image
-          source={{ uri: `${host}images/victo.png` }}
+          source={{ uri: previewData.thumbSrc }}
           style={styles.image}
         />
       </View>
